@@ -47,6 +47,13 @@ const STATIC_PATHS = [
     '/lib.js.map',
 ];
 
+/**
+ * Extension code lives under this path and is updated independently of SillyTavern
+ * (git pull on the extension), so the ST version check cannot invalidate it.
+ * These files are therefore served network-first; the cache is only a fallback.
+ */
+const EXTENSION_PATH = '/scripts/extensions/';
+
 let userHandle = 'anonymous';
 let lastVersionCheck = 0;
 let knownRevision = null;
@@ -163,6 +170,24 @@ self.addEventListener('fetch', (event) => {
     }
 
     if (!isStatic(url)) return;
+
+    // Extension files: network-first. They change when the extension is updated,
+    // which the ST version check cannot see.
+    if (url.pathname.startsWith(EXTENSION_PATH)) {
+        event.respondWith((async () => {
+            const cache = await caches.open(cacheName());
+            try {
+                const fresh = await fetch(request, { cache: 'no-store' });
+                if (fresh.ok) cache.put(request, fresh.clone());
+                return fresh;
+            } catch {
+                const cached = await cache.match(request);
+                if (cached) return cached;
+                throw new Error('offline and not cached: ' + url.pathname);
+            }
+        })());
+        return;
+    }
 
     event.respondWith((async () => {
         const cache = await caches.open(cacheName());
