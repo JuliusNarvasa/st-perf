@@ -1,0 +1,11 @@
+{
+    "display_name": "ST Performance (service worker cache)",
+    "loading_order": 90,
+    "requires": [],
+    "optional": [],
+    "js": "index.js",
+    "css": "style.css",
+    "author": "Bambaw",
+    "version": "0.1.0",
+    "homePage": ""
+}

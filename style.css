@@ -1,0 +1,11 @@
+.st-perf-settings small {
+    display: block;
+    margin-top: 4px;
+}
+
+.st-perf-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+}
