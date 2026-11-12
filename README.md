@@ -120,7 +120,7 @@ Measured on SillyTavern 1.19.0 (commit `7e8663cd9`), Chromium, localhost.
 
 ## Requirements
 
-- SillyTavern 1.19.0+ (uses `GET /version` and `GET /api/users/me`).
+- Tested on **SillyTavern 1.19.0** (commit `7e8663cd9`) only. Other versions are untested.
 - HTTPS (service workers are not allowed on plain HTTP, except on `localhost`).
 - nginx in front of SillyTavern for the cache headers (optional but recommended).
 

@@ -16,7 +16,8 @@ plus an optional **nginx** change that gives the frontend long-lived cache heade
 
 ## Prerequisites
 
-- SillyTavern 1.19.0+ (`GET /version` and `GET /api/users/me` are used).
+- SillyTavern **1.19.0** — the only version tested so far (commit `7e8663cd9`). Other
+  versions are untested.
 - **HTTPS** — service workers require a secure context (`localhost` is exempt).
 - nginx in front of SillyTavern (recommended, not required).
 - Write access to `<ST>/data/<user>/extensions/` and to the nginx vhost.
